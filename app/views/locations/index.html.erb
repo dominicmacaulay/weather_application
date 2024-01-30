@@ -1,0 +1,39 @@
+<body>
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Weather Locations</h1>
+
+  <div id="locations">
+    <% @locations.each do |location| %>
+      <div class="info">
+        <%= render location %>
+        <p>
+          <%= link_to "Show Weather", location %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "Add New Location", new_location_path %>
+</body>
+
+<style>
+  #locations {
+    border: 0px;
+    display:flex;
+    flex-direction:row;
+  }
+
+  .info {
+    border: 2px solid black;
+    margin: 15px;
+    padding: 5px;
+  }
+
+  body{
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center; 
+    align-items:center;
+  }
+</style>
