@@ -26,7 +26,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
 
     respond_to do |format|
-      if @location.save && 
+      if @location.save
         format.html { redirect_to location_url(@location), notice: "Location was successfully created." }
         format.json { render :show, status: :created, location: @location, weather: @weather }
       else
@@ -68,19 +68,6 @@ class LocationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def location_params
       params.require(:location).permit(:name, :ip)
-    end
-
-    def check_ip()
-      require 'net/http'
-      require 'json'
-      # Retreive the lattitude and longitude coordinates of the ip address
-      loc = Net::HTTP.get(URI("https://ipapi.co/#{ip}/json/"))
-      loc_info = JSON.parse(loc)
-      if loc_info["error"] == true
-        return false
-      else
-        return true
-      end
     end
 
     def get_specific_location(ip)
