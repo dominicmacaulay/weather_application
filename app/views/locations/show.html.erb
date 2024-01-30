@@ -1,11 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @location %>
+
 <div>
-  <%= @weather["daily"]["time"] %><br>
-  <%= @weather["daily"]["temperature_2m_max"] %><br>
-  <%= @weather["daily"]["temperature_2m_min"] %>
+  <b><u>Specific Location</u></b><br>
+  <i><%= @specific_location %></i>
 </div>
+
+<% @weather.each do |weather| %>
+  <p>
+    <%= weather %>
+  </p>
+<% end %>
 
 <div>
   <%= link_to "Edit this location", edit_location_path(@location) %> |
