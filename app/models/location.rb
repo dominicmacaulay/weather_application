@@ -1,4 +1,4 @@
 class Location < ApplicationRecord
-    validates :name, presence: true
-    validates :ip, presence: true, ipaddr: true
+    validates :name, presence: true, uniqueness: true
+    validates :ip, presence: true, ipaddr: true, uniqueness: true
 end
