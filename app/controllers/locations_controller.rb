@@ -8,6 +8,8 @@ class LocationsController < ApplicationController
 
   # GET /locations/1 or /locations/1.json
   def show
+    @ip_address = @location.ip
+    @weather = get_weather(@ip_address)
   end
 
   # GET /locations/new
@@ -26,7 +28,7 @@ class LocationsController < ApplicationController
     respond_to do |format|
       if @location.save
         format.html { redirect_to location_url(@location), notice: "Location was successfully created." }
-        format.json { render :show, status: :created, location: @location }
+        format.json { render :show, status: :created, location: @location, weather: @weather }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @location.errors, status: :unprocessable_entity }
@@ -66,5 +68,19 @@ class LocationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def location_params
       params.require(:location).permit(:name, :ip)
+    end
+
+    def get_weather(ip)
+      require 'net/http'
+      require 'json'
+      # Retreive the lattitude and longitude coordinates of the ip address
+      loc = Net::HTTP.get(URI("https://ipapi.co/#{ip}/json/"))
+      loc_info = JSON.parse(loc)
+      latitude = loc_info["latitude"]
+      longitude = loc_info["longitude"]
+
+      #retreive and return the next seven days and their corresponding highs and lows
+      weather = Net::HTTP.get(URI("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&daily=temperature_2m_max&daily=temperature_2m_min&temperature_unit=fahrenheit"))
+      return JSON.parse(weather)
     end
 end
