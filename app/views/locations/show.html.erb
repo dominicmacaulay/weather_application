@@ -17,7 +17,7 @@
   <%= link_to "Edit this location", edit_location_path(@location) %> |
   <%= link_to "Back to your locations", locations_path %>
 
-  <%= button_to "Destroy this location", location_path(@location), data: {
+  <%= link_to "Destroy", location_path(@location), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   } %>
