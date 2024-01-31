@@ -45,4 +45,7 @@ class LocationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to locations_url
   end
+
+  # tests for added methods
+  
 end
