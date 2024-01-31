@@ -8,7 +8,9 @@ class LocationsController < ApplicationController
 
   # GET /locations/1 or /locations/1.json
   def show
-    @weather = get_weather(@location.ip)
+    #get completed array with each day's highs and lows
+    @weather = get_coordinates(@location.ip)
+    #get a string with the city, province, and country
     @specific_location = get_specific_location(@location.ip)
   end
 
@@ -82,7 +84,7 @@ class LocationsController < ApplicationController
       return "#{city}, #{state}, #{country}"
     end
 
-    def get_weather(ip)
+    def get_coordinates(ip)
       require 'net/http'
       require 'json'
       # Retreive the lattitude and longitude coordinates of the ip address
@@ -90,7 +92,10 @@ class LocationsController < ApplicationController
       loc_info = JSON.parse(loc)
       latitude = loc_info["latitude"]
       longitude = loc_info["longitude"]
+      return get_weather(latitude, longitude)
+    end
 
+    def get_weather(latitude, longitude)
       #retreive and return the next seven days and their corresponding highs and lows
       weather = Net::HTTP.get(URI("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&daily=temperature_2m_max&daily=temperature_2m_min&temperature_unit=fahrenheit"))
       weather_parse = JSON.parse(weather)
