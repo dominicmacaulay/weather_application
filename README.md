@@ -9,6 +9,6 @@ the ip address needs to be valid, otherwise, the location will fail to be create
 After you have created your location, you can edit it, delete it, or go back and 
 create more or view other locations.
 
-You can view this application on Heroku here: 
+You can view this application on Heroku [here.](link)
 
 This application runs on Ruby 3.2.2 on Rails 7.1.3
