@@ -2,14 +2,11 @@ class Location < ApplicationRecord
     validates :name, presence: true, uniqueness: true
     validates :ip, presence: true, ipaddr: true, uniqueness: true
 
-    @specific_location = specific_location(:ip)
-    @weather = weather_array(:ip)
-    
-    def specific_location(ip)
+    def specific_location
         require 'net/http'
         require 'json'
         #retreive city, state, and country of ip address
-        loc = Net::HTTP.get(URI("https://ipapi.co/#{ip}/json/"))
+        loc = Net::HTTP.get(URI("https://ipapi.co/#{:ip}/json/"))
         loc_info = JSON.parse(loc)
         city = loc_info["city"]
         state = loc_info["region"]
@@ -17,11 +14,11 @@ class Location < ApplicationRecord
         return "#{city}, #{state}, #{country}"
     end
 
-    def weather_array(ip)
+    def weather_array
         require 'net/http'
         require 'json'
         # Retreive the lattitude and longitude coordinates of the ip address
-        loc = Net::HTTP.get(URI("https://ipapi.co/#{ip}/json/"))
+        loc = Net::HTTP.get(URI("https://ipapi.co/#{:ip}/json/"))
         loc_info = JSON.parse(loc)
         latitude = loc_info["latitude"]
         longitude = loc_info["longitude"]

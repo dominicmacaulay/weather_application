@@ -4,10 +4,10 @@
 
 <div>
   <b><u>Specific Location</u></b><br>
-  <i><%= @specific_location %></i>
+  <i><%= @location.specific_location %></i>
 </div>
 
-<% @weather.each do |weather| %>
+<% @location.weather.each do |weather| %>
   <p>
     <%= weather %>
   </p>
