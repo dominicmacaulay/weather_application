@@ -22,18 +22,20 @@ class Location < ApplicationRecord
         loc_info = JSON.parse(loc)
         latitude = loc_info["latitude"]
         longitude = loc_info["longitude"]
-        return get_weather(latitude, longitude)
-      end
+        weather_hash = weather_hash(latitude, longitude)
+        array = pair_values(weather_hash)
+        return array
+    end
   
-      def get_weather(latitude, longitude)
+    def weather_hash(latitude, longitude)
         #retreive and return the next seven days and their corresponding highs and lows
         weather = Net::HTTP.get(URI("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&daily=temperature_2m_max&daily=temperature_2m_min&temperature_unit=fahrenheit"))
         weather_parse = JSON.parse(weather)
         weather_hash = weather_parse["daily"]
-        return pair_values(weather_hash)
-      end
+        return weather_hash
+    end
   
-      def pair_values(hash)
+    def pair_values(hash)
         arr = hash["time"]
         x = 0
         weather_output = Array.new
@@ -44,5 +46,5 @@ class Location < ApplicationRecord
           x = x + 1
         end
         return weather_output
-      end
+    end
 end
