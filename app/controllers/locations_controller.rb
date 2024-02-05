@@ -9,9 +9,9 @@ class LocationsController < ApplicationController
   # GET /locations/1 or /locations/1.json
   def show
     #get completed array with each day's highs and lows
-    @weather = get_coordinates(@location.ip)
+    #@weather = get_coordinates(@location.ip)
     #get a string with the city, province, and country
-    @specific_location = get_specific_location(@location.ip)
+    #@specific_location = get_specific_location(@location.ip)
   end
 
   # GET /locations/new
