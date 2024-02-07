@@ -1,0 +1,14 @@
+<div>
+  <b><u>Your Specific Location</u></b><br>
+  <i><%= @location.user_specific_location %></i>
+</div>
+
+<% @location.user_weather.each do |weather| %>
+  <p>
+    <%= weather %>
+  </p>
+<% end %>
+
+<div>
+    <%= link_to "Back to Home", locations_path %>
+</div>
