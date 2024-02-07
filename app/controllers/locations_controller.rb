@@ -4,15 +4,12 @@ class LocationsController < ApplicationController
   # GET /locations or /locations.json
   def index
     @locations = Location.all
+    @user_specific_location = @location.user_specific_location
+    @user_weather = @location.user_weather
   end
 
   # GET /locations/1 or /locations/1.json
   def show
-
-  end
-
-  #GET user location
-  def user
 
   end
 

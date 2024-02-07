@@ -6,10 +6,10 @@
   <div>
     <div>
       <b><u>Your Specific Location</u></b><br>
-      <i><%= @location.user_specific_location %></i>
+      <i><%= user_specific_location %></i>
     </div>
 
-    <% @location.user_weather.each do |weather| %>
+    <% user_weather.each do |weather| %>
       <p>
         <%= weather %>
       </p>
