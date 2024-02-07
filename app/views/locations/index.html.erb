@@ -3,19 +3,6 @@
 
   <h1>Weather Locations</h1>
 
-  <div>
-    <div>
-      <b><u>Your Specific Location</u></b><br>
-      <i><%= user_specific_location %></i>
-    </div>
-
-    <% user_weather.each do |weather| %>
-      <p>
-        <%= weather %>
-      </p>
-    <% end %>
-  </div>
-
   <div id="locations">
     <% @locations.each do |location| %>
       <div class="info">
